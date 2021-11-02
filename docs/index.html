@@ -129,7 +129,7 @@
           },
         },
         plugins: [
-          DocsifyCarbon.create('CEBI6KQE', 'docsifyjsorg'),
+          //DocsifyCarbon.create('CEBI6KQE', 'docsifyjsorg'),
           function(hook, vm) {
             hook.beforeEach(function(html) {
               if (/githubusercontent\.com/.test(vm.route.file)) {
@@ -159,7 +159,7 @@
                 }
                 return (
                   html +
-                  '<br/> <i>Vercel</i> has given us a Pro account <br/> <a href="https://vercel.com/?utm_source=docsifyjsdocs" target="_blank"><img src="https://github.com/steetstyle/doctolio/docs/_media/fb.png" alt="furkan bostanci" width="100" height="64"></a>'
+                  '<br/><img src="https://raw.githubusercontent.com/steetstyle/doctolio/production/docs/_media/fb.svg" alt="furkan bostanci" width="100" height="64">'
                 );
               });
           },
