@@ -1,6 +1,6 @@
 
 # Önsöz
-Bu yazı size Vulkan apisini kullanmanın temelini ve prensiplerini anlatacaktır. Vulkan modern grafik kartları için daha çok soyutlama katmanı sağlayan Khronos Group tarafından geliştirilen bir grafik kartı apisidir. Bu interface aracılığıyla uygulamamızda OpenGL veya Direct3D gibi apilere kıyasla daha çok soyutlama yapabileceğimizden daha fazla performans ve daha az supriz sürücü ile karşılaştırackatır. Vulkanın arkasındaki fikirler Direct3D ve Metal inkine benzer fakat Vulkan Cross-platform olduğu için aynı anda daha fazla işletim sisteminde çalıştırmamıza olanak sağlar.
+Bu yazı size Vulkan apisini kullanmanın temelini ve prensiplerini anlatacaktır. Vulkan modern grafik kartları için daha çok soyutlama katmanı sağlayan Khronos Group tarafından geliştirilen bir grafik kartı apisidir. Bu interface aracılığıyla uygulamamızda OpenGL veya Direct3D gibi apilere kıyasla daha çok soyutlama yapabileceğimizden daha fazla performans ve daha az supriz sürücü ile karşılaşacaktır. Vulkanın arkasındaki fikirler Direct3D ve Metal inkine benzer fakat Vulkan Cross-platform olduğu için aynı anda daha fazla işletim sisteminde çalıştırmamıza olanak sağlar.
 
 
 Ancak bu avantajlar tabiki doğası gereği "price you pay" yani meali ne kadar ödersen okadar karşılığını alırsın. Bu da demek oluyor ki diğer grafik apilere kıyasla daha çok çalışmamız anlamına geliyor. API ile ilgili her ayrıntının uygulamamız tarafından en baştan ayarlanması gerekiyor.

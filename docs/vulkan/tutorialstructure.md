@@ -9,7 +9,7 @@ Bundan sonra ekrana üçgen çizdirmek için gerekli tüm basit komponentleri Vu
 
 Yazılan her bölüm bir önceki aşamayı takip edecektir, ayrıca her bir bölümü ayrı bir yazıymış gibide okuyabilirsiniz Vulkanda belirli bir konuda bilgi sahibi olmak için. Bu da demek oluyor ki yazıyı öğrenmek için referans olarak alabilirsiniz. Tüm Vulkan typeları ve fonksiyonları api dokümasyonunda ki ilgili yere linklenecektir onlara tıklayıp daha fazla öğrenebilirsiniz. Vulkan diğerlerine kıyasla çok yeni bir api, o yüzden api dokümasyonunda çok fazla değişiklik olabilir. [Bu repo](https://github.com/KhronosGroup/Vulkan-Docs) üzerinden geri dönüşlerinizi commit olarak iletebilirsiniz.
 
-Daha önceden bahsettiğimiz gibiö Vulkan grafik kartımız üzerinde daha fazla kontrol sahibi olmamamız için diğer apilere kıyasla daha çok parametre içeriyor. Bu yüzden basit operasyonlar örnek olarak sürekli aynı işlemlerin tekrarlanmasına yol açacaktır. O yüzden Helper fonksiyonlar üzerinden gitmeye çalışacağız.
+Daha önceden bahsettiğimiz gibi, Vulkan grafik kartımız üzerinde daha fazla kontrol sahibi olmamamız için diğer apilere kıyasla daha çok parametre içeriyor. Bu yüzden basit operasyonlar örnek olarak sürekli aynı işlemlerin tekrarlanmasına yol açacaktır. O yüzden Helper fonksiyonlar üzerinden gitmeye çalışacağız.
 
 Her bir bölümde o konuya kadar tamamlanmış kodun linki eklenecektir. Yazdığınız kodun yapısı hakkında bir şüphe varsa veya hata alıyorsanız kodu inceleyebilir ve karşılaştırabilirsiniz. Kodlar farklı markaların grafik kartlarıyla denenmiştir.
 

@@ -1,0 +1,2 @@
+-  [Istatiksel Fizik Odevler](#)
+    - [Odev 1](lessons/statisticalphy/homework1.md)
