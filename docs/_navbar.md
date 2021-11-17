@@ -1,3 +1,2 @@
-- Translations
+- Dil
   - [:tr: Turkish](/)
-  - [:en: English](/en-en/)

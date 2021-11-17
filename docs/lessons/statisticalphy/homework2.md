@@ -37,8 +37,8 @@ eğer tam bir diferansiyelse aşağıdaki kısmi türev formları birbirlerine e
 Sabit sıcaklıkta olduğu için sıcaklıtaki değişim miktarı 0 bu yüzden başlangıçtaki sıcaklık ile en son durumdaki sıcaklık birbirne eşittir.
 $$ T_i = T_s $$
 
-Sistem üzerinde üzerinde iş yapılmıyorsa ama sistem V hacminden 3V hacmine aniden çıkarılıyor.
-Sistemdeki entropi değişimini bulmamız istiyor, entropi bir durum fonksiyonudur ve durum fonskiyonu olması dolayısıyla yoldan bağımsızdır.
+Sistem üzerinde üzerinde iş yapılmıyor ve V hacminden 3V hacmine aniden çıkarılıyor.
+Gazdaki entropi değişimini bulmamız istiyor, entropi bir durum fonksiyonudur ve durum fonskiyonu olması dolayısıyla yoldan bağımsızdır.
 Sistemde sıcaklık değişimi olmadığı için izotermal bir süreç bundan dolayı aklımıza hemen izotermal süreçlerde ideal gazdaki iç enerjinin değişiminin 0 olduğu aklımıza gelmeli.
 
 $$ 0 =  TdS - PdV $$
@@ -47,9 +47,9 @@ $$ dS = \frac{P}{T}dV = \frac{R}{V}dV $$
 
 Gazın Entropisindeki degişimi hesaplamak için integral dS in integralini almamız gerekli o yüzden:
 
-$$ \Delta_{Gaz} = \int^{3V}_{V}{\frac{R}{V}dV} = R ln(3)$$ 
+$$ \Delta{S}_{Gaz} = \int^{3V}_{V}{\frac{R}{V}dV} = R ln(3)$$ 
 
-sistem izotermal olduğundan dışındaki sistem varsa bile ısı alışverişi olmadığından toplam entropideki değişim sıfır olacaktır.
+sistem izotermal olduğundan dışındaki sistem varsa bile ısı alışverişi olmadığından sistemin toplam entropisindeki değişim sıfır olacaktır.
 
 
 
