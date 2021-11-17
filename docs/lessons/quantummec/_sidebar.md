@@ -1,2 +1,0 @@
--  [Kuantum Mekanigi Odevler](#)
-    - [Odev 1](lessons/quantummec/problem1_3.md)
