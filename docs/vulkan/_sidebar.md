@@ -1,2 +1,4 @@
-- [Önsöz](vulkan/quickknowledge.md)
-- [Yazı İçeriğinin Dizaynı](vulkan/tutorialstructure.md)
+-  [Geri]()
+-  [Vulkan Tutorial](#)
+    - [Önsöz](vulkan/quickknowledge.md)
+    - [Yazı İçeriğinin Dizaynı](vulkan/tutorialstructure.md)

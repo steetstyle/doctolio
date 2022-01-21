@@ -13,5 +13,4 @@ Daha önceden bahsettiğimiz gibi, Vulkan grafik kartımız üzerinde daha fazla
 
 Her bir bölümde o konuya kadar tamamlanmış kodun linki eklenecektir. Yazdığınız kodun yapısı hakkında bir şüphe varsa veya hata alıyorsanız kodu inceleyebilir ve karşılaştırabilirsiniz. Kodlar farklı markaların grafik kartlarıyla denenmiştir.
 
-Vulkan hala çok yeni bir API'dir ve bir aşamayı uygularken henüz en iyi yöntemler henüz tam olarak oturmamıştır. 
-
+Vulkan hala çok yeni bir API'dir ve bir aşamayı uygularken henüz en iyi yöntemler henüz tam olarak oturmamıştır.

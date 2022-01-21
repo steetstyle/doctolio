@@ -1,4 +1,5 @@
--  [Istatiksel Fizik Odevler](#)
+-  [Geri](lessons/introduction.md)
+-  [Istatiksel Fizik Odevler](lessons/statisticalphy/homework1.md)
     - [Odev 1](lessons/statisticalphy/homework1.md)
     - [Odev 2](lessons/statisticalphy/homework2.md)
     - [Odev 3](lessons/statisticalphy/homework3.md)

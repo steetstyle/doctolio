@@ -1,2 +1,2 @@
 - Dil
-  - [:tr: Turkish](/)
+  - [Türkçe](/)
