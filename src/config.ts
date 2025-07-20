@@ -1,7 +1,7 @@
 export const SITE = {
-  website: "https://furkanbostanic.com/", // replace this with your deployed domain
+  website: "https://github.com/steetstyle/doctolio", // replace this with your deployed domain
   author: "Furkan Bostancı",
-  profile: "https://furkanbostanci.com/about",
+  profile: "https://github.com/steetstyle",
   desc: "Hello! I’m Furkan Bostancı",
   title: "Furkan Bostancı",
   ogImage: "astropaper-og.jpg",
@@ -14,7 +14,7 @@ export const SITE = {
   editPost: {
     enabled: true,
     text: "Edit page",
-    url: "https://github.com/steetstle/doctolio",
+    url: "https://github.com/steetstyle/doctolio",
   },
   dynamicOgImage: true,
   dir: "ltr", // "rtl" | "auto"

@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://furkanbostanic.com/sitemap-index.xml
+Sitemap: https://github.com/steetstle/sitemap-index.xml
