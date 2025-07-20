@@ -1,7 +1,7 @@
 ---
 author: Furkan Bostancı
-pubDatetime: 2025-07-19T12:15:00Z
-modDatetime: 2025-07-19T12:15:00Z
+pubDatetime: 2021-07-19T12:15:00Z
+modDatetime: 2021-07-19T12:15:00Z
 title: Legendre Polinomlarının Ortogonalite İntegrali
 slug: legendre-polinomlari-ortogonalite-integraki
 featured: false

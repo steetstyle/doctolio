@@ -1,7 +1,7 @@
 ---
 author: Furkan Bostancı
-pubDatetime: 2025-07-19T11:45:00Z
-modDatetime: 2025-07-19T11:45:00Z
+pubDatetime: 2021-07-19T11:45:00Z
+modDatetime: 2021-07-19T11:45:00Z
 title: Legendre Polinomlarının Negatif Mertebe İlişkisi
 slug: legendre-polinomlari-negatif-mertebe-iliskisi
 featured: false
