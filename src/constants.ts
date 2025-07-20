@@ -25,18 +25,6 @@ export const SOCIALS: Social[] = [
     icon: IconGitHub,
   },
   {
-    name: "Instagram",
-    href: "https://instagram.com/steetstyle",
-    linkTitle: `${SITE.title} on Instagram`,
-    icon: IconInstagram,
-  },
-  {
-    name: "X",
-    href: "https://x.com/username",
-    linkTitle: `${SITE.title} on X`,
-    icon: IconBrandX,
-  },
-  {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/steetstyle/",
     linkTitle: `${SITE.title} on LinkedIn`,
