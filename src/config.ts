@@ -15,7 +15,7 @@ export const SITE = {
   editPost: {
     enabled: true,
     text: "Edit page",
-    url: "https://github.com/steetstyle/doctolio",
+    url: "https://github.com/steetstyle/doctolio/tree/main/src/",
   },
   dynamicOgImage: true,
   dir: "ltr",
