@@ -4,7 +4,7 @@
   "version": "5.5.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build --base=/doctolio/ && pagefind  --site dist && cp -r dist/pagefind public/ mv dist docs",
+    "build": "astro check && astro build --base=/doctolio/ && pagefind  --site dist && cp -r dist/pagefind public/ && cp dist docs",
     "build:windows": "astro check && astro build --base=/doctolio/ && pagefind --site dist && move dist\\pagefind public\\ && move dist docs",
     "preview": "astro preview",
     "sync": "astro sync",
