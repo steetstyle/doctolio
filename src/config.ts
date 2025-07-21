@@ -1,6 +1,6 @@
 export const SITE = {
-  website: "https://steetstyle.github.io/doctolio/", // replace this with your deployed domain
-  base: "doctolio",
+  website: "https://furkanbostanci.com", // replace this with your deployed domain
+  base: "",
   author: "Furkan Bostancı",
   profile: "https://github.com/steetstyle",
   desc: "Hello! I’m Furkan Bostancı",
