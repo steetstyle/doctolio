@@ -1,5 +1,0 @@
-
-User-agent: *
-Allow: /
-
-Sitemap: https://steetstyle.github.io/doctolio/sitemap-index.xml
