@@ -4,7 +4,7 @@ pubDatetime: 2025-07-20T01:37:00Z
 modDatetime: 2025-07-20T01:37:00Z
 title: Byte Pair Encoding Tokenizer
 slug: byte-pair-encoding-tokenizer
-featured: false
+featured: true
 draft: false
 tags:
   - NLP
@@ -50,7 +50,7 @@ ac: 1
 
 Bu dizide en çok tekrar edilen byte çifti "aa". Bu yüzden en çok tekrar edilen bu veri sözlük üzerinde kullanılmayan bir byte değeri ile değiştirelecek. Örnek olarak bu byte değerini "Z" olarak şeçelim, bu değer sonuç olarak bi sonraki kullanılabilir token indeximiz olarak atanacak. Bu işlem sonucu değiştirilmiş verimiz ve mevcut vocabulary üzerine eklenen değer aşağıdaki gibi olacak.
 
-``` 
+```
 ZabdZabac
 -----------------
 Z=aa

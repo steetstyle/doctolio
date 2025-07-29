@@ -3,8 +3,8 @@ author: Furkan Bostancı
 pubDatetime: 2025-07-29T20:00:00Z
 modDatetime: 2025-07-29T20:00:00Z
 title: Locality of Reference ve Performans Optimizasyonları
-slug: techniques/locality-of-reference
-featured: false
+slug: locality-of-reference
+featured: true
 draft: false
 tags:
   - Performans
