@@ -4,7 +4,7 @@ pubDatetime: 2021-07-19T12:00:00Z
 modDatetime: 2021-07-19T12:00:00Z
 title: Legendre Polinomları Türev İlişkisi
 featured: false
-draft: true
+draft: false
 tags:
   - Matematik
   - Elektromanyetik Teori

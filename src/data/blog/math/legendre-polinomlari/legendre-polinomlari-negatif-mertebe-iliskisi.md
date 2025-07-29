@@ -4,7 +4,7 @@ pubDatetime: 2021-07-19T11:45:00Z
 modDatetime: 2021-07-19T11:45:00Z
 title: Legendre Polinomlarının Negatif Mertebe İlişkisi
 featured: false
-draft: true
+draft: false
 tags:
   - Matematik
   - Elektromanyetik Teori

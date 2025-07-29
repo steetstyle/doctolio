@@ -1,7 +1,7 @@
 ---
 author: Furkan Bostancı
-pubDatetime: 2025-07-29T20:00:00Z
-modDatetime: 2025-07-29T20:00:00Z
+pubDatetime: 2025-07-29T19:00:00Z
+modDatetime: 2025-07-29T19:00:00Z
 title: Locality of Reference ve Performans Optimizasyonları
 featured: true
 draft: false

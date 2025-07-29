@@ -4,7 +4,7 @@ pubDatetime: 2021-07-19T12:15:00Z
 modDatetime: 2021-07-19T12:15:00Z
 title: Legendre Polinomlarının Ortogonalite İntegrali
 featured: false
-draft: true
+draft: false
 tags:
   - Matematik
   - Elektromanyetik Teori
