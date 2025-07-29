@@ -3,7 +3,6 @@ author: Furkan Bostancı
 pubDatetime: 2025-07-29T20:00:00Z
 modDatetime: 2025-07-29T20:00:00Z
 title: Locality of Reference ve Performans Optimizasyonları
-slug: locality-of-reference
 featured: true
 draft: false
 tags:
@@ -11,11 +10,12 @@ tags:
   - Oyun Geliştirme
   - Locality of Reference
   - CPU Cache
+  - GPU Cache
   - C++
   - Vertex Buffer
   - ECS
 description: >
-  Modern CPU’ların cache mekanizması, locality of reference kavramı ve oyun motorlarında performans için optimizasyon teknikleri
+  Modern CPU tarafındaki cache mekanizmaları, locality of reference kavramı ve oyun motorlarında performans için optimizasyon teknikleri
 ---
 
 Hızlı çalışması gereken bir yazılım oluşturman gerektiğinde, hızlı ve verimli olması için gerçekten çok fazla çaba harcaman gerekiyor—özellikle oyun motorlarında. Algoritmaları büküp, grafiklerin nasıl çizildiğini iyileştirip, birden fazla CPU çekirdeğini kullanarak işleri hızlandırman gerekebilir.
@@ -76,7 +76,7 @@ long long calculateSum(const std::vector<int>& data) {
 
 Bu örnekteki sum değişkeni sürekli kullanıldığından CPU onu cache üzerinde tutar. Bu sayede hızlı bir şekilde güncellenir. ```Temporal locality```’nin kötü bir örneğini göstermek zordur çünkü genellikle doğal yazım tarzı zaten bu prensibe uygundur. Ancak uzun süre kullanılmayan bir değişkenin yeniden kullanılması durumunda, bu veri büyük olasılıkla cache’ten çıkarılmış olur --```cache eviction```-- ve erişimde yavaşlama yaşanabilir.
 
-Şimdi bi sonraki arkadaşımıza uğrayalım ```spatial locality```. Bu prensip eğer programınız bir parça veriye ulaşmaya çalışıyor, yüksek olasılıkla veriye ulaşılan yerlere yakın konumlardaki veriye erişlmeye çalışacaktır memory içindeki. Bu önemli bi konsept çünkü CPU veriyi byte by byte çekmez memory'nin tüm parçasını getirir ki bu tipik olarak 64 byte boyutunda ```cache line```olarak adlandırılır. Özetle davranışı eğer bir memory'den veri çekildiyse yakın zaman o memorydeki diğer byte'larda kullanılacaktır varsayımı yapar.
+Şimdi bi sonraki arkadaşımıza uğrayalım ```spatial locality```. Bu prensip eğer programınız bir parça veriye ulaşmaya çalışıyor, yüksek olasılıkla veriye ulaşılan yerlere yakın konumlardaki veriye erişlmeye çalışacaktır memory içindeki. Bu önemli bi konsept çünkü CPU veriyi byte by byte çekmez memory'nin tüm parçasını getirir ki bu tipik olarak 64 byte boyutunda ```cache line``` olarak adlandırılır. Özetle davranışı eğer bir memory'den veri çekildiyse yakın zaman o memorydeki diğer byte'larda kullanılacaktır varsayımı yapar.
 
 Hadi şimdi tekrar 2D array örneğinizden ```spatial locality```'i ziyaret edelim:
 

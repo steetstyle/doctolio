@@ -3,9 +3,8 @@ author: Furkan Bostancı
 pubDatetime: 2021-07-19T11:45:00Z
 modDatetime: 2021-07-19T11:45:00Z
 title: Legendre Polinomlarının Negatif Mertebe İlişkisi
-slug: legendre-polinomlari-negatif-mertebe-iliskisi
 featured: false
-draft: false
+draft: true
 tags:
   - Matematik
   - Elektromanyetik Teori

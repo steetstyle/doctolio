@@ -3,7 +3,6 @@ author: Furkan Bostancı
 pubDatetime: 2021-07-20T12:00:00Z
 modDatetime: 2021-07-20T12:00:00Z
 title: (Vulkan Serisi) 1 - İçerik Dizaynı
-slug: vulkan-serisi/icerik-dizayni
 featured: false
 draft: false
 tags:
