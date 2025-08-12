@@ -1,9 +1,8 @@
 ---
 author: Furkan Bostancı
-pubDatetime: 2025-07-20T13:00:00Z
-modDatetime: 2025-07-20T13:00:00Z
+pubDatetime: 2021-07-20T13:00:00Z
+modDatetime: 2021-07-20T13:00:00Z
 title: (Vulkan Serisi) 2 - Giriş
-slug: vulkan-serisi/giris
 featured: false
 draft: false
 tags:
@@ -31,7 +30,7 @@ Ancak bu avantajların bir bedeli vardır: Daha fazla performans, API’nin tüm
 
 Bu yazıda **OpenGL** veya **Direct3D**’ye hâkim olmanız beklenmemektedir, fakat 3D grafiklerin bilgisayarda nasıl çizdirildiğine dair temel bilgi yararlı olacaktır. Perspektif projeksiyon gibi konular detaylı olarak ele alınmayacak, bunun yerine gerekli olduğunda öğrenebileceğiniz kaynaklar önerilecektir.
 
-C yerine C++ kullanılması tavsiye edilmektedir; çünkü mantık ve kaynak yaşam sürelerini yönetmek için **sınıflar** ve **RAII** gibi C++ özellikleri kullanılacaktır. Ancak C dilini tercih edenler, kendi lineer cebir kütüphanelerini ve bellek yönetimini sağlamakla yükümlüdür.  
+C yerine C++ kullanılması tavsiye edilmektedir; çünkü mantık ve kaynak yaşam sürelerini yönetmek için **sınıflar** ve **RAII** gibi C++ özellikleri kullanılacaktır. Ancak C dilini tercih edenler, kendi lineer cebir kütüphanelerini ve bellek yönetimini sağlamakla yükümlüdür.
 
 Vulkan API ile çalışırken **orijinal C API’si** kullanılacaktır; fakat C++ kullanan geliştiriciler, hataları önlemeye yardımcı olan **Vulkan-Hpp binding**’lerinden de yararlanabilirler.
 

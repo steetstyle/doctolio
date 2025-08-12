@@ -1,9 +1,8 @@
 ---
 author: Furkan Bostancı
-pubDatetime: 2025-07-20T12:00:00Z
-modDatetime: 2025-07-20T12:00:00Z
+pubDatetime: 2021-07-20T12:00:00Z
+modDatetime: 2021-07-20T12:00:00Z
 title: (Vulkan Serisi) 1 - İçerik Dizaynı
-slug: vulkan-serisi/icerik-dizayni
 featured: false
 draft: false
 tags:
@@ -18,6 +17,7 @@ description: >
 Başlarken **Vulkan**’ın genel özelliklerine ve nasıl çalıştığına değinecek; başlangıçta beraber ekrana bir üçgen çizeceğiz. Bu aşamada gerçekleştireceğiniz küçük adımlar, ilerleyen bölümlerde daha anlamlı hale gelecek ve tüm yapbozu birleştirmemize yardımcı olacaktır.
 
 Daha sonra, lineer cebir işlemleri için **GLM** kütüphanesini, pencere oluşturma için **GLFW**’yi ve gerekli geliştirme araçları için **Vulkan SDK**’yı kullanarak geliştirme ortamını kuracağız. Yazıda, bu araçların Windows’ta Visual Studio veya Ubuntu Linux’ta GCC ile nasıl kurulacağı ele alınmamaktadır. İlgili kurulum aşamalarını [bu link](https://vulkan-tutorial.com/Development_environment) üzerinden takip ederek tamamlayabilirsiniz.
+Çoğunlukla [Vulkan Tutorial](https://vulkan-tutorial.com/) üzerindenki pratikler ve anlatımlar üzerinden ileryeceğiz.
 
 ## Uygulama Aşamaları
 

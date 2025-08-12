@@ -1,9 +1,8 @@
 ---
 author: Furkan Bostancı
-pubDatetime: 2025-07-19T12:00:00Z
-modDatetime: 2025-07-19T12:00:00Z
+pubDatetime: 2021-07-19T12:00:00Z
+modDatetime: 2021-07-19T12:00:00Z
 title: Legendre Polinomları Türev İlişkisi
-slug: legendre-polinomlari-turev-iliskisi
 featured: false
 draft: false
 tags:
