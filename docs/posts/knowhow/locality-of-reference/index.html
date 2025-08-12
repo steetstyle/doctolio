@@ -1,0 +1,679 @@
+<!DOCTYPE html><html dir="ltr" lang="en" class="scroll-smooth" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://furkanbostanci.com/posts/knowhow/locality-of-reference/"><meta name="generator" content="Astro v5.12.0"><!-- General Meta Tags --><title>Locality of Reference ve Performans Optimizasyonları | Furkan Bostancı</title><meta name="title" content="Locality of Reference ve Performans Optimizasyonları | Furkan Bostancı"><meta name="description" content="Modern CPU tarafındaki cache mekanizmaları, locality of reference kavramı ve oyun motorlarında performans için optimizasyon teknikleri
+"><meta name="author" content="Furkan Bostancı"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph / Facebook --><meta property="og:title" content="Locality of Reference ve Performans Optimizasyonları | Furkan Bostancı"><meta property="og:description" content="Modern CPU tarafındaki cache mekanizmaları, locality of reference kavramı ve oyun motorlarında performans için optimizasyon teknikleri
+"><meta property="og:url" content="https://furkanbostanci.com/posts/knowhow/locality-of-reference/"><meta property="og:image" content="https://furkanbostanci.com/posts/knowhow/locality-of-reference/index.png"><!-- Article Published/Modified time --><meta property="article:published_time" content="2025-07-29T19:00:00.000Z"><meta property="article:modified_time" content="2025-07-29T19:00:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://furkanbostanci.com/posts/knowhow/locality-of-reference/"><meta property="twitter:title" content="Locality of Reference ve Performans Optimizasyonları | Furkan Bostancı"><meta property="twitter:description" content="Modern CPU tarafındaki cache mekanizmaları, locality of reference kavramı ve oyun motorlarında performans için optimizasyon teknikleri
+"><meta property="twitter:image" content="https://furkanbostanci.com/posts/knowhow/locality-of-reference/index.png"><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Locality of Reference ve Performans Optimizasyonları | Furkan Bostancı","image":"https://furkanbostanci.com/posts/knowhow/locality-of-reference/index.png","datePublished":"2025-07-29T19:00:00.000Z","dateModified":"2025-07-29T19:00:00.000Z","author":[{"@type":"Person","name":"Furkan Bostancı","url":"https://github.com/steetstyle"}]}</script><!-- Enable RSS feed auto-discovery  --><!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery --><link rel="alternate" type="application/rss+xml" title="Furkan Bostancı" href="https://furkanbostanci.com/rss.xml"><meta name="theme-color" content=""><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/assets/ClientRouter.astro_astro_type_script_index_0_lang.D98dxaWf.js"></script><script src="/toggle-theme.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><link rel="stylesheet" href="/assets/about.BfMGnkYi.css">
+<style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+:where([data-astro-image]){object-fit:var(--fit);object-position:var(--pos);height:auto}:where([data-astro-image=full-width]){width:100%}:where([data-astro-image=constrained]){max-width:100%}
+</style><style>[data-astro-transition-scope="astro-fam6wyqg-1"] { view-transition-name: locality-of-reference-ve-performans-optimizasyonlari; }@layer astro { ::view-transition-old(locality-of-reference-ve-performans-optimizasyonlari) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(locality-of-reference-ve-performans-optimizasyonlari) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(locality-of-reference-ve-performans-optimizasyonlari) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(locality-of-reference-ve-performans-optimizasyonlari) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-2"] { view-transition-name: performans; }@layer astro { ::view-transition-old(performans) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(performans) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(performans) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(performans) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-3"] { view-transition-name: oyun-gelistirme; }@layer astro { ::view-transition-old(oyun-gelistirme) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(oyun-gelistirme) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(oyun-gelistirme) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(oyun-gelistirme) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-4"] { view-transition-name: locality-of-reference; }@layer astro { ::view-transition-old(locality-of-reference) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(locality-of-reference) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(locality-of-reference) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(locality-of-reference) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-5"] { view-transition-name: cpu-cache; }@layer astro { ::view-transition-old(cpu-cache) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(cpu-cache) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(cpu-cache) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(cpu-cache) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-6"] { view-transition-name: gpu-cache; }@layer astro { ::view-transition-old(gpu-cache) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(gpu-cache) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(gpu-cache) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(gpu-cache) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-6"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-6"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-6"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-6"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-7"] { view-transition-name: c; }@layer astro { ::view-transition-old(c) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(c) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(c) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(c) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-7"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-7"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-7"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-7"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-8"] { view-transition-name: vertex-buffer; }@layer astro { ::view-transition-old(vertex-buffer) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(vertex-buffer) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(vertex-buffer) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(vertex-buffer) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-8"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-8"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-8"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-8"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-9"] { view-transition-name: ecs; }@layer astro { ::view-transition-old(ecs) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(ecs) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(ecs) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(ecs) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-9"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-9"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-9"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-9"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body data-astro-cid-sckkx6r4>  <header> <a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">
+Skip to content
+</a> <div id="nav-container" class="mx-auto flex max-w-app flex-col items-center justify-between sm:flex-row"> <div id="top-nav-wrap" class="relative flex w-full items-baseline justify-between bg-background p-4 sm:items-center sm:py-6"> <a href class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"> Furkan Bostancı </a> <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"> <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden" id="close-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep" id="menu-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg> </button> <ul id="menu-items" class="mt-4 grid w-44 grid-cols-2 place-content-center gap-2 [&#38;>li>a]:block [&#38;>li>a]:px-4 [&#38;>li>a]:py-3 [&#38;>li>a]:text-center [&#38;>li>a]:font-medium [&#38;>li>a]:hover:text-accent sm:[&#38;>li>a]:px-2 sm:[&#38;>li>a]:py-1 hidden sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0"> <li class="col-span-2"> <a href="/posts" class="active-nav">
+Posts
+</a> </li> <li class="col-span-2"> <a href="/tags">
+Tags
+</a> </li> <li class="col-span-2"> <a href="/about">
+About
+</a> </li> <li class="col-span-2"> <a href="/archives" class="group inline-block hover:text-accent focus-outline flex justify-center p-3 sm:p-1" aria-label="archives" title="Archives"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden sm:inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg> <span class="sm:sr-only">Archives</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <a href="/search" class="group inline-block hover:text-accent focus-outline flex p-3 sm:p-1" aria-label="search" title="Search"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg> <span class="sr-only">Search</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <button id="theme-btn" class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" /><path d="M6.343 17.657l-1.414 1.414" /><path d="M6.343 6.343l-1.414 -1.414" /><path d="M17.657 6.343l1.414 -1.414" /><path d="M17.657 17.657l1.414 1.414" /><path d="M4 12h-2" /><path d="M12 4v-2" /><path d="M20 12h2" /><path d="M12 20v2" /></svg> </button> </li> </ul> </nav> </div> </div> <div class="mx-auto max-w-app px-4"> <hr class="border-border" aria-hidden="true"> </div> </header> <script type="module">function s(){const e=document.querySelector("#menu-btn"),t=document.querySelector("#menu-items"),n=document.querySelector("#menu-icon"),o=document.querySelector("#close-icon");!e||!t||!n||!o||e.addEventListener("click",()=>{const c=e.getAttribute("aria-expanded")==="true";e.setAttribute("aria-expanded",c?"false":"true"),e.setAttribute("aria-label",c?"Open Menu":"Close Menu"),t.classList.toggle("hidden"),n.classList.toggle("hidden"),o.classList.toggle("hidden")})}s();document.addEventListener("astro:after-swap",s);</script> <div class="mx-auto flex w-full max-w-app items-center justify-start px-2"><a id="back-button" href class="group inline-block hover:text-accent focus-outline mt-8 mb-2 flex hover:text-foreground/75"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg><span>Go back</span></a></div><script type="module">function o(){const t=document.querySelector("#back-button"),e=sessionStorage.getItem("backUrl");e&&t&&(t.href=e)}document.addEventListener("astro:page-load",o);o();</script> <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-12" data-pagefind-body> <h1 class="inline-block text-2xl font-bold text-accent sm:text-3xl" data-astro-transition-scope="astro-fam6wyqg-1"> Locality of Reference ve Performans Optimizasyonları </h1> <div class="my-2 flex items-center gap-2"> <div class="flex items-center gap-x-2 opacity-80"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 min-w-[1.375rem]"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>  <time class="text-sm sm:text-base" datetime="2025-07-29T19:00:00.000Z">29 Jul, 2025</time> </div> <span aria-hidden="true" class="max-sm:hidden hidden">|</span>  </div> <article id="article" class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"> <p>Hızlı çalışması gereken bir yazılım oluşturman gerektiğinde, hızlı ve verimli olması için gerçekten çok fazla çaba harcaman gerekiyor—özellikle oyun motorlarında. Algoritmaları büküp, grafiklerin nasıl çizildiğini iyileştirip, birden fazla CPU çekirdeğini kullanarak işleri hızlandırman gerekebilir.</p>
+<p>Ama burada iyi yazılmış programları bile yavaşlatan gizli bir problem var: Bilgisayarlardaki CPU’ların belleği nasıl yönettiği…
+İşte burada <code>locality of reference</code> devreye giriyor ve önemini gösteriyor.</p>
+<p>Aslında tüm mesele, kodun bilgisayarın belleğiyle ne kadar verimli iletişim kurduğu ve bunun oyunun akıcı ve uyumlu bir şekilde çalışmasını doğrudan etkilemesi. Buna yeteri kadar dikkat etmediğinde, gerçekten üzerine çok çaba harcadığın optimizasyonlar tamamlanmamış olabilir; örneğin sürekli ana bellekteki veriyi çekerek daha yavaş çalışmasına neden olabilirsin.</p>
+<p>Hadi basit bir C++ kod örneğine bakalım. Hayal edelim ki büyük bir grid’imiz var, bu grid oyundaki dünyamızı veya bir texture’ı temsil ediyor. C++ üzerinde 2D array’i <code>float grid[HEIGHT][WIDTH]</code> şeklinde satır satır bellekte tutabiliriz, bu da tüm sayıların tek bir satırda yan yana tutulduğu anlamına geliyor.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// 2D bir array, oyunumuzun dünyasındaki bir grid veya texture</span></span>
+<span class="line"><span>const int WIDTH = 4096;</span></span>
+<span class="line"><span>const int HEIGHT = 4096;</span></span>
+<span class="line"><span>float grid[HEIGHT][WIDTH];</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>void processGridBadly() {</span></span>
+<span class="line"><span>	// Bu şekilde iterate etmek bellekteki veriye ulaşmak için iyi bir yöntem değil</span></span>
+<span class="line"><span>	for (int j = 0; j &#x3C; WIDTH; ++j) {</span></span>
+<span class="line"><span>		for (int i = 0; i &#x3C; HEIGTH; ++i) {</span></span>
+<span class="line"><span>			grid[i][j] *= 0.5f;</span></span>
+<span class="line"><span>		}</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>void processGridWell() {</span></span>
+<span class="line"><span>	// Bu şekilde iterate etmek bellekteki veriye ulaşmak için daha iyi bir yöntem</span></span>
+<span class="line"><span>	for (int j = 0; j &#x3C; HEIGTH; ++j) {</span></span>
+<span class="line"><span>		for (int i = 0; i &#x3C; WIDTH; ++i) {</span></span>
+<span class="line"><span>			grid[i][j] *= 0.5f;</span></span>
+<span class="line"><span>		}</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>Yukarıdaki iki metod da aynı sayıda işlem yapıyor. Bu yüzden aynı sürede çalışacaklarını varsayabilirsiniz; ancak modern bilgisayarlarda <code>processGridWell()</code> metodu çok daha hızlı çalışacaktır. Peki neden? Gerçekten arka planda ne oluyor? Bunun cevabı <code>locality of reference</code> kavramında yatıyor. Oyun motorlarındaki matematik ve grafik üzerinde ne kadar büyük bir etkisi olduğuna bakalım ve ardından oyunlarınızı nasıl daha hızlı ve akıcı hale getirebileceğinizi örneklerle görelim.</p>
+<h3 id="locality-of-reference">Locality of Reference</h3>
+<p>Davranışını öngörebildiğimiz işlemlerin neden bazı yazım biçimlerinde daha fazla performans gösterdiğini anlamak için modern CPU’ların veriyi nasıl işlediğini bilmek önemli. Bellek erişiminde iki temel prensip vardır: <code>temporal locality</code> ve <code>spatial locality</code>. Bu konseptler, CPU’nun küçük ama çok hızlı bellek alanlarında (cache) veriyi nasıl sakladığını ve yazılımın bir sonraki adımda hangi veriye ihtiyaç duyabileceğini nasıl tahmin ettiğini açıklar.</p>
+<p>İlk olarak <code>temporal locality</code>’den bahsedelim. Bu prensip, eğer bir veri parçası kullanılıyorsa, aynı parçanın yakın gelecekte tekrar kullanılma olasılığı çok yüksektir. Bunu şöyle düşünebiliriz: alet çantanızdan spesifik bir aleti seçtiniz; biraz sonra muhtemelen o aleti yeniden kullanacaksınız. CPU’lar da son kullanılan verileri hızlı çalışan cache’lerinde tutar. Program bu veriyi yeniden istediğinde, eğer cache içindeyse buna <code>cache hit</code> denir ve bu erişim neredeyse anlıktır. Eğer veri cache’de değilse, <code>cache miss</code> meydana gelir ve CPU, bu veriyi yavaş olan ana bellekte arar, bu da erişim süresini artırır.</p>
+<p>Aşağıda iyi ve basit <code>temporal locality</code> kullanımı örnek olarak bulabilirsiniz:</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// İyi bir temporal locality örneği: 'sum' değişkenine tekrar tekrar erişiliyor</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>long long calculateSum(const std::vector&#x3C;int>&#x26; data) {</span></span>
+<span class="line"><span>	long long sum = 0; // Her iterasyonda 'sum' değişkenine erişiliyor</span></span>
+<span class="line"><span>	for (int x : data) {</span></span>
+<span class="line"><span>		sum += x; // 'sum' değişkeni sürekli okunup üzerine yazılıyor ve cache üzerinde tutuluyor</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>	return sum;</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>Bu örnekteki sum değişkeni sürekli kullanıldığından CPU onu cache üzerinde tutar. Bu sayede hızlı bir şekilde güncellenir. <code>Temporal locality</code>’nin kötü bir örneğini göstermek zordur çünkü genellikle doğal yazım tarzı zaten bu prensibe uygundur. Ancak uzun süre kullanılmayan bir değişkenin yeniden kullanılması durumunda, bu veri büyük olasılıkla cache’ten çıkarılmış olur —<code>cache eviction</code>— ve erişimde yavaşlama yaşanabilir.</p>
+<p>Şimdi bi sonraki arkadaşımıza uğrayalım <code>spatial locality</code>. Bu prensip eğer programınız bir parça veriye ulaşmaya çalışıyor, yüksek olasılıkla veriye ulaşılan yerlere yakın konumlardaki veriye erişlmeye çalışacaktır memory içindeki. Bu önemli bi konsept çünkü CPU veriyi byte by byte çekmez memory’nin tüm parçasını getirir ki bu tipik olarak 64 byte boyutunda <code>cache line</code> olarak adlandırılır. Özetle davranışı eğer bir memory’den veri çekildiyse yakın zaman o memorydeki diğer byte’larda kullanılacaktır varsayımı yapar.</p>
+<p>Hadi şimdi tekrar 2D array örneğinizden <code>spatial locality</code>’i ziyaret edelim:</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// İyi bir spatial locality örneği (bitişik bellek üzerinden iterasyon)</span></span>
+<span class="line"><span>void processGridWell() {</span></span>
+<span class="line"><span>	for (int i = 0; i &#x3C; HEIGHT; ++i) {</span></span>
+<span class="line"><span>		for (int j = 0; j &#x3C; WIDTH; ++j) {</span></span>
+<span class="line"><span>			// Birbirine bitişik sayılara erişim yapılıyor ve değerleri değiştiriliyor</span></span>
+<span class="line"><span>			grid[i][j] *= 0.5f;</span></span>
+<span class="line"><span>		}</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p><code>processGridWell()</code> fonskiyonunda dönğü j üzerinden <code>grid[i][0]</code>, <code>grid[i][1]</code>, <code>grid[i][2]</code> şeklinde devam ediyor. Bu ulaşılan array elelmanları ardışık şekilde tutuluyor memory içinde raw-major array için. <code>grid[i][0]</code> yüklendiğinden  <code>grid[i][0]</code>, <code>grid[i][1]</code>, <code>grid[i][2]</code> şeklinde ilerleyen tüm <code>cache line</code> getirip cacheliyor. Tüm erişelecek veriler <code>grid[i][0]</code>, <code>grid[i][1]</code>, <code>grid[i][2]</code> … artık hızlı <code>cache hits</code>lerde. Burada <code>grid[i][j]</code> ardışık verilere ulaşacak şekilde ayarlanırsa sonuçunda bellekte yan yana tutulduğu için, <code>cache line</code> sayesinde bu veriler cache’e toplu halde yüklenir. Bu da erişimlerin çoğunun <code>cache hit</code> ile sonuçlanmasını sağlar.</p>
+<p>Aşağıda kötü bir <code>spatial locality</code> örneği yer alıyor:</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Kötü spatial locality (array elemanlarına büyük stride aralıkları ile ulaşmak)</span></span>
+<span class="line"><span>void processGridBadly() {</span></span>
+<span class="line"><span>	for (int j = 0; j &#x3C; WIDTH; ++j) {</span></span>
+<span class="line"><span>		for (int i = 0; i &#x3C; HEIGHT; ++i) {</span></span>
+<span class="line"><span>			// Array elemanlarına ulaşırken birbirnden uzak ardışık olmayan şekilde memoryden ulaşıyor</span></span>
+<span class="line"><span>			grid[i][j] *= 0.5.f;</span></span>
+<span class="line"><span>		}</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p><code>processGridBadly()</code> fonskiyonu içerisinde döngü boyunca <code>i</code> üzerinden ilerliyor. Çünkü örnekteki array row-major bir array ve <code>grid[0][j]</code>, <code>grid[1][j]</code> elemanları ardışık bir şekilde birbirini izlemiyor bunlar tamamen farklı satırlardaki veriler. Her <code>grid[i][j]</code> elemanına erişiminde olası bi ihtimalle yeni bi <code>cache miss</code>’e hit edecektir cache’e yüklenmeyen bir <code>cache line</code> olduğu için, bu şüreçte CPU sürekli <code>cache line</code> çekmeye çalıştığından kayda değer bir yavaşlama gözlemleyebiliriz.</p>
+<h3 id="aos-vs-soa-ve-ecs">AoS vs SoA ve ECS</h3>
+<p>Matematik çok temel bi konu oyun motorlarından konuşurken. Az önce örneklendirdiğimiz basit grid örneği bile, veriye erişimi belirleme yöntemimizin performansa nasıl büyük bir  etki gösterebileceğini farkettiriyor <code>locality of reference</code> yüzünden. Bu bizi çok tercih edilen ve önemli bi tasarım seçimine getiriyor oyun geliştirmede. Memory üzeirinde veriyi nasıl dağıtmalısın, özellikle <code>Array of Structs (SoA)</code> ve <code>Struct of Arrays(SoA)</code>. Burada yapılan şeçim direk olarak verinin nasıl saklandığını ve CPU’nun cache’ini verimli bir şekilde kullanıldığını etkiliyor.</p>
+<p>Bir parçacık sistemi oluşturduğumuzu düşünelim, her bir parçacığın konumu, hızı ve kalan bir zamanı olsun.</p>
+<p><code>Array of Structs (SoA)</code> yaklaşımında bir array veya liste oluştururuz tüm elemanları <code>struct</code>veya <code>object</code> olan ve parçacığı temsil eden.
+Bu da tek bir parçacıkta ki verinin (konumu, hızı ve kalan yaşam süresi) ardışık olarak tutulduğu anlamına geliyor.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>struct ParticleAoS {</span></span>
+<span class="line"><span>	glm::vec3 position;</span></span>
+<span class="line"><span>	glm::vec3 velocity;</span></span>
+<span class="line"><span>	float life;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>std::vector&#x3C;ParticleAoS> particleAoS;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>void updateParticleAoS(float deltaTime) {</span></span>
+<span class="line"><span>	for (auto&#x26; p : particlesAoS) {</span></span>
+<span class="line"><span>		// Konumunu, hızını ve kalan yaşam süresini güncelle</span></span>
+<span class="line"><span>		p.positon += p.velocity * deltaTime;</span></span>
+<span class="line"><span>		p.life -= deltaTime;</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>Tek bir parçacık için <code>Array of Structs (SoA)</code> yöntemi çok kullanışlı gözüküyor çünkü ne zaman bu parçacığın bir verisine ulaşmak istediğimizde bütün elemanları (konumu, hızı ve yaşam süresi) CPU tarafından getirilip aynı zamanda cache’ine yükleniyor çünkü tüm veri yanyana olacak şeklide memory’de duruyor.</p>
+<p>Kod üzerinde sürekli eriştiğin veri yanyana ise tek bir parçacık için bu mükemmel bişi. Örnek olarak eğer fonksiyonun konumunu, hızını ve yaşam süresini sürekli güncelliyorsa <code>Array of Structs (SoA)</code> erişim durumumuz için mükemmel bir <code>spatial locality</code> sağlıyor. Parçacık için bir veriye ihtiyacın olduğunda yüm veri <code>cache hit</code> üzerinden geliyor.</p>
+<p><code>Struct of Arrays (SoA)</code> yaklaşımında ise tam tersine veriyi componente göre organize ederiz. Tam parçacık listesi yerine parçacıklarla alakalı tüm bilglieri ayrı ayrı listelerde barındırırız bütün konuları, bütün hızları, bütün yaşam sürelerini ayrı array veya listelerde tutmak şeklinde.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>struct ParticleSoA {</span></span>
+<span class="line"><span>	std::vector&#x3C;glm::vec3> positions;</span></span>
+<span class="line"><span>	std::vector&#x3C;glm::vec3> velocities;</span></span>
+<span class="line"><span>	std::vector&#x3C;float> lives;</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>ParticleSoA particlesSoA;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>void updateParticlePositionsSoA(float deltaTime) {</span></span>
+<span class="line"><span>	for (size_t i = 0; i &#x3C; particlesSoA.positions.size(); ++i) {</span></span>
+<span class="line"><span>		// Sadece konum ve hıza erişiyoruz ilgili konumu verisini güncellemek için</span></span>
+<span class="line"><span>		particlesSoA.positions[i] += particlesSoA.velocities[i] * deltaTime;</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p><code>Struct of Arrays (SoA)</code> yaklaşımı parçacıkların bi parça verisi kullanırken gerçekten parlıyor. Örnek verelim bir tane fonksiyonunuz var parçacığın sadece konumu güncelleiyor hıza bağımlı bir şekilde (bknz… <code>updateParticlePositionsSoA</code>), <code>Struct of Arrays (SoA)</code> yaklaşımını kullanırken konum ve hız arrayleri CPU’nun cacheine yükleniyor <code>lives</code> verisi fonskiyon içerisinde herhangi bir spesifik task için kullanılmadığı için CPU cacheinin dışında kalıyor. Gerçekleşen bu davranış cache space ve memory bandwith üzerinde çok değerli daha fazla kullanılabilir bir kaynak bırakıyor, bu nedenle CPU ihtiyaç duymadığı verileri getirmeyip gereksiz zaman harcamıyor.</p>
+<p>İşte bu yüzden bu yapılar <code>Entity-Component-System (ECS)</code> mimarisi gibi popüler be modern ve yüksek performanslı oyun motorlarınında kullanılıyor. Bu yazıda <code>Entity-Component-System (ECS)</code> için detaylı bi izaha girmeyeceğiz (Daha detaylı açıklamasını buradan bulabilirsin <a href="https://levelup.gitconnected.com/fast-ecs-from-scratch-in-rust-for-your-game-engine-d7de8f23cd4a">ECS</a>), burada önemli olan <code>locality of reference</code>yi kullanmak neden iyi bi getirisi olabiliyor. <code>Entity-Component-System (ECS)</code> doğası gereği <code>Struct of Arrays (SoA)</code> tarzı bi veri düzenini kullanımını teşvik ediyor. Örneğin, ne mzaman <code>Movement System</code>tüm konuları hıza bağlı bi şekilde güncellemek isterse <code>PositionComponent</code>ve <code>VelocityComponent</code> ardışık memory blokları sayesinde iterate edebilir. Buradaki can alıcı ve en önemli avantah bu ayrım sayesinde sistem sadece işlemi yapmak için gerekli spesifik veriyi o işlemde CPU cache’ine yükler. Diğer herhangi bir bileşen <code>RenderComponent</code>veya <code>HealthComponent</code> tamamen <code>Movement System</code>tarafından göz ardı edildiğinden bu veriler hiç zaman değerli CPU cache’ine yüklenmez. Bu <code>cache pollution</code>’a engel olarak sadece gerekli ve ilgili verilerin cache üzerinde doldurulmasına ve yüksek verimli bi işleme yol açar.</p>
+<p>Ancak şunu belirtmekte fayda var <code>Entity-Component-System (ECS)</code> gerçek uygulamalrda parçalı tasarımı teşvik ederken, bazı durumlarda sürekli grup olarak beraber çekilen veriyi tek bir component üzerinde birleştirmek güzel bi fikir olabilir. Örneğin <code>PositionComponent</code>ve <code>VelocityComponent</code> genellikle her zaman beraber okunur ve yazılır <code>Movement System</code>tarafından bu yüzden bu verileri birleştirip tek bir <code>KinematicsComponent</code> yapmak daha verimli olabilir.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>struct KinematicsComponent {</span></span>
+<span class="line"><span>	float position[3];</span></span>
+<span class="line"><span>	float velocity[3];</span></span>
+<span class="line"><span>};</span></span></code></pre>
+<p>Bu pratik, önde gelen oyun motorları ve çatıları altında sıklıkla göreceğiz bir yaklaşımdır. Örnek olarak <code>Unity’s Data-Oriented Technology Stack (DOTS)</code>’ı düşünün. Onların <code>Entity-Component-System (ECS)</code> implementatsyonu konum, rotasyon ve ölçek verilerinin barındıran <code>LocalTransform</code> componentine sahip. Kesinlikle bu veriler farklı componentlere ayırılabilir ama bunları beraber şekilde tamamen mantıklı bi tasarım şekliyle 3 parça veriyi tek bir olarak neredeyse her zaman aynı anda erişildiğinden tek bir bileşen olarak uygulamışlar çünkü herhangi bir mekansal dönüşüm uygulamadığımızda her bu 3 veriye ulaşıyoruz genellikle.</p>
+<h3 id="vertex-buffer-data-layout">Vertex Buffer Data Layout</h3>
+<p>Verinizi Vertex Buffer üzerinde konumlandırma stratejiniz GPU’nun internal cache’i üzerindeki verimliliğini kayda değer miktarda etkiliyor. İki tane temel yaklaşımımız var, bunlar Interleaved ve Seperated layoutlar</p>
+<p>“Interleaved Vertex Data Layout<code>yaklaşımında tüm özellikler tek bir vertex(position, normal, texture kordinatları ve dahası) olarak ardışık şekilde memory'de tutuluyor. Bu yaklaşım konseptsel olarak daha önce CPU tarafında bahsettiğimiz</code>Àrray of Structs (AoS)<code>yaklaşımına benziyor. Her bir</code>struct<code>ın bu bağlamda tam bir </code>vertex``` olarak ilgili şekilde toplanmış olarak.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>struct VertexInterleaved {</span></span>
+<span class="line"><span>	glm::vec3 position;</span></span>
+<span class="line"><span>	glm::vec2 normal;</span></span>
+<span class="line"><span>	glm::vec2 textCoord;</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>std::vector&#x3C;VertexInterleaved> interleavedVertices;</span></span></code></pre>
+<p>Bu layout özellikle <code>vertex shader</code>’ının tüm <code>vertex</code>’in özelliklerine ulaşmak istediğinde çok iyi bir performans sunar. Örneğin GPU ne zaman <code>vertex</code>in konumunu çekmek istese yüksek olasılıkla normal ve texture kordinatlarınıda beraberinde aynı <code>cache line</code> üzerinde çeker çünkü bu ulaşılmak istenen veri paketlenmiş bir şekilde tutuluyor. Bu yaklaşım genellikle genel rendering işlemleri için daha kolay yönetilmesi yüzünden tüm <code>vertex</code> özelliklerini sürekli kullanırken tercih edilir.</p>
+<p>Alternatif olarak <code>Seperated Vertex Data Layout</code> yönteminde ise her bir özellik tipi kendi ayrı, ardışık dizilerinde saklanır. Örneğin her <code>vertex</code> konumları bir array içinde, tüm normaller bir başkası içinde, tüm texture kordinatları bir başka array’in içinde şeklinde bir veri düzeninde gider. Bu yaklaşımı direkt olarak daha önce bahsettiğimiz <code>Structs of Arrays (SoA)</code> ile eşleştirebiliriz.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>struct MeshDataSeperated {</span></span>
+<span class="line"><span>	std::vector&#x3C;glm::vec3> positions;</span></span>
+<span class="line"><span>	std::vector&#x3C;glm::vec3> normals;</span></span>
+<span class="line"><span>	std::vector&#x3C;glm::vec2> texCoords;</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>MeshDataSeperated seperatedMeshData;</span></span></code></pre>
+<p>Bu layout özellikle bir çok spesifik özellikler çok fazla <code>vertices</code>üzerinden gerekliyse üstün bir <code>spatial locality</code>sağlar. Örneğin <code>render pass</code> üzerinde sadece <code>positions</code> okuyorsun <code>shadow map generation</code> veya <code>depth only pass</code>yaparken GPU bu durumda sadece <code>positions</code> arrayini çekebilir. Bu yöntem kesinlikle <code>seperated layout</code>lar için yararlı bi kullanım alanı, <code>normal</code>leri ve <code>texCoords</code>u cache’e yükelemekten kaçınmak için. Buna karşın kesinlikle daha fazla memory bandwith kullanımına sahip oluyoruz ama pazarlıksız bir takas olmaz, yönetimi biraz daha karmaşıklaşabiliyor özellikle birbirinden uzak bufferların senkronize olması gerekirken.</p>
+<h3 id="index-buffer-order">Index Buffer Order</h3>
+<p>Vertex verilerini nasıl düzelendiğimizin ötesinde bunları hangi sıra ile üçlerin çizilmesine talimat vermek bile rendering performansını önemli ölçüde etkiliyor bu yüzden <code>index buffer</code>kullanmak rendering performansı önemli ölçüde arttırıyor. Bunun birincil nedeni <code>GPU Vertex Cache</code>.</p>
+<p>Modern GPUlar küçük ama yüksek hızlı cacheler ile özellikle donatılmıştır vertices sonuçlarını önceki hesaplanmasını tamamlamış <code>vertex shader</code> üzerinden sonuçlarını kaydederek. <code>Vertex shader</code> belirli <code>vertex</code>ler ile işini bitirdiğinde hesaplanan değerler geçiçi olarak cache üzerinde tutulur. Buradaki önemli avantaj aynı <code>vertex</code> yakın zamanda tekrardan başka bir üçgen için kullanılacak ve işlenmiş veri hala özelliştirilmiş cache içerisinde ve GPU bu veriyi önceden hesaplanmış bu verilerden getirirken çok hızlı bir şekilde getirebiliyor. Bu demek oluyorki GPU hesaplanması gereken <code>vertex shader</code>’ın spesifik <code>vertex</code>inin tekrar hesaplanmasını bypass ediyor ki buda perfomans olarak kazanç olarak kaydediliyor çünkü <code>vertex shader</code> hesaplamaları genel hesaplanılabilirlik kaynağı olarak yoğun bir şekilde kaynak harcarlar.</p>
+<p>Buradaki ana optimizasyon stratejisi üçgenleri sıralamadan oluşuyor sonuç olarak bunlar <code>index buffer</code> indislerine karşılık geliyor.
+Sık yapılan işlemlerde çok kullanılan verticesleri kullanarak. Bu yaklaşım GPU <code>vertex cache</code>ine yüksek olasılıkla <code>cache hit</code> yapacak şekilde maksimize ediyor olur. GPU bi seri üçheni işlerken eğer <code>vertex</code> ardarda çizilen üçgenlerde kullanılıyorsa bu işleme alınan veri hazır bir şekilde cache üzerinde tutulur. Bu yöntem verimliliğine GPUnın  paylaşılan <code>vertex</code>ler için önceden hesaplanmış sonuçlardan üzerinden ulaşmaşıyla gerçekleşir bu sayede sadece yeni karşılaşılan <code>vertex</code> ler için bu hesaplamalar yapılır. Buna karşın eğer üçgenler rastegele bi şekilde sıralanmış ise önceden hesaplanmış bir <code>vertex</code>in cache evicted(cache üzerinden çıkarılmış) olmasına neden olabileceğinden tekrar kullanılmadan önce tüm bu hesaplamaların tekrar en baştan hesaplanması gerekebilir .</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Orijinal indisler basit bir mesh için</span></span>
+<span class="line"><span>// 0---1</span></span>
+<span class="line"><span>// | / |</span></span>
+<span class="line"><span>// 2---3</span></span>
+<span class="line"><span>std::vector&#x3C;unsigned int> originalIndices = {</span></span>
+<span class="line"><span>	1, 0, 2 // Birinci üçgen</span></span>
+<span class="line"><span>	1, 3, 2 // İkinci üçgen</span></span>
+<span class="line"><span>	// Bu sıralama cache için ideal olmayabilir</span></span>
+<span class="line"><span>	// Eğer 1, 3, 2 verileri 0, 1, 2 den uzak ise memor üzerinde</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// Optimize edilmiş indisler aynı dörtgen için, yeniden sıralandı daha iyi bir cache locality için</span></span>
+<span class="line"><span>// Algoritma en son kullanılan vertexlerin (0, 1, 2) sıcak bi şekilde cache üzerinde kalmasını sağlıyor.</span></span>
+<span class="line"><span>std::vector&#x3C;unsigned int> optimizedIndices = {</span></span>
+<span class="line"><span>	0, 1, 2,</span></span>
+<span class="line"><span>	1, 2, 3</span></span>
+<span class="line"><span>	// Yeniden sıralanmış 1 ve 2 paylaşılacak şekilde ilk üçgen ile birlikte</span></span>
+<span class="line"><span>};</span></span></code></pre>
+<p>Cache üzerindeki verimliliği arttırmak için geliştiriciler genellikle <code>vertex index</code>lerinin sırasını optimize etmek için algortimalar kullanırlar. Bu araçlar genellikle offline olarak <code>asset pipeline</code> içinde çalıştırılır, saf mesh verisini GPU içerisinde daha arkadaş canlısı olarak dönüştürülmesine yardımcı olarak.</p>
+<p>Bu algoritmalardan en çok kullanılanlardan biri <code>Tom Forsyth's Linear-Speed Vertex Cache Optimization</code>. Bu algoritma çok büyük mesh verileri üzerinde üçgen sayısını lineer bir şekilde ölçekleyerek verimli çalışacak şekilde tasarlanmış düşünülmüş ki buda modern oyunlarda karmaşık modeller için günümüzde hayati bir öneme sahip.</p>
+<p>Forsyth algortimasının kalbinde yatan yakşalım greedy(açgözlülük) tabanlı dinamik skor sistemi. Basitleştirilmiş GPU <code>vertex cache</code>ini(Son kullanılanlara göre, ilk giren ilk çıkar vb. yöntemlerle) “hot” veya “cold” olarak olduğunu simule eder. Her bir <code>vertex</code> simule edilmiş cache üzerinden yakınlığına bağlı ve en çok kullanılanlar en çok skoru alacak şekilde bi puan alırlar. Kalan üçgenelere yine küçük bi destek vererek <code>cache eviction</code>  işleminden önce yapılmaları sağlanılmaya çalışılır. Üçgenler skoru 3 adet onu oluşturan <code>vertex</code>lerin skorlarına bağlı olarak ağırlıklandırılır. Algoritma sürekli olarak çizilmeyen en yüksek skorlu üçgeni bularak tekrarlanır ve bu indisler optimize edilmiş çıktı listesine eklenir ve bunun sonunda simule edilmiş cache üzerinde güncelleme yapar ve <code>vertex</code>skorlarını etkiler. Bu greedy(açgözlülük) bazlı yaklaşım algoritmanın her zaman anlık olarak en yararlı olabilecek üçgeni seçmesine yardım olmasından emin olurarak yavaşlatan ve kompleks şeçimlerden GPU’nun kaçınmasını teşvik eder.</p>
+<p>Tom Forsyth algoritmasına ek olarak, <code>vertex cache</code> optimizasyonuna kayda değer bir katkısı olan Tipsify da vardır. Bu, üçgen listelerini optimize etmeyi vaat eden farklı bir stratejidir. Forsyth algoritması, tüm üçgenleri sırayla skorlayıp en iyi bir sonraki üçgeni kalan kümeden seçerek ilerlerken, Tipsify ise <code>vertex-centric "fanning out"</code> yaklaşımını benimser. Tipik olarak bir <code>vertex</code> seçilir ve bu <code>vertex</code>i kullanan tüm üçgenler işlenir. Ardından, etkili bir şekilde <code>fanning out</code> yöntemi uygulanır. Yani köşenin etrafındaki üçgenler tüketildikten sonra, komşu <code>vertex</code>lerden birine geçilerek aynı işlem tekrarlanır. Bu yerel gruplama, <code>cache locality</code> sağlanmasına yardımcı olur.</p>
+<p>Tipsify’ı özel kılan özelliklerden biri de sıkça kullanılan vertex cache optimizasyonunu, <code>overdraw reduction</code> (fazla çizim azaltımı) ile birleştirmesidir. <code>Overdraw</code>, aynı pikselin birden fazla üçgen tarafından tekrar tekrar çizilmesiyle oluşur ve bu durum <code>GPU cycle</code>’larını tüketir. Tipsify, bu tür gereksiz piksel hesaplamalarını en aza indirmek için üçgenleri, görünme olasılığı yüksek olan geometrileri önceliklendirerek sıralar.</p>
+<p>Tipsify, aynı zamanda hızlı ve ölçeklenebilir olmasıyla bilinir; özellikle büyük meshler üzerinde etkili çalışır. Hatta AMD’nin Triangle Order Optimization Tool (Tootle) sistemine entegre edilmiştir. Bu da Tipsify’ı, özellikle AMD ekosisteminde popüler bir tercih haline getiriyor.</p> </article> <hr class="my-8 border-dashed">  <ul class="mt-4 mb-8 sm:my-8"> <li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/performans/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-2"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Performans</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/oyun-gelistirme/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-3"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Oyun Geliştirme</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/locality-of-reference/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-4"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Locality of Reference</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/cpu-cache/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-5"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>CPU Cache</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/gpu-cache/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-6"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>GPU Cache</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/c/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-7"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>C++</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/vertex-buffer/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-8"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Vertex Buffer</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/ecs/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-9"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>ECS</span> </a> </li> </ul> <div id="btt-btn-container" class="fixed end-4 bottom-8 z-50 md:sticky md:end-auto md:float-end md:me-1 translate-y-14 opacity-0 transition duration-500"> <button data-button="back-to-top" class="group relative bg-background px-2 py-1 size-14 rounded-full shadow-xl md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg"> <span id="progress-indicator" class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"></span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block rotate-90 md:hidden"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <span class="sr-only text-sm group-hover:text-accent md:not-sr-only"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path d="M16 9l-4 -4" /><path d="M8 9l4 -4" /></svg>
+Back To Top
+</span> </button> </div> <script data-astro-rerun>
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    const rootElement = document.documentElement;
+    const btnContainer = document.querySelector("#btt-btn-container");
+    const backToTopBtn = document.querySelector("[data-button='back-to-top']");
+    const progressIndicator = document.querySelector("#progress-indicator");
+
+    if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
+      return;
+
+    // Attach click event handler for back-to-top button
+    backToTopBtn.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    // Handle button visibility according to scroll position
+    let lastVisible = null;
+    function handleScroll() {
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      const scrollTop = rootElement.scrollTop;
+      const scrollPercent = Math.floor((scrollTop / scrollTotal) * 100);
+
+      progressIndicator.style.setProperty(
+        "background-image",
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+      );
+
+      const isVisible = scrollTop / scrollTotal > 0.3;
+
+      if (isVisible !== lastVisible) {
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        lastVisible = isVisible;
+      }
+    }
+
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+  backToTop();
+</script> <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start"><span class="italic">Share this post on:</span><div class="text-center"><a href="https://wa.me/?text=https://furkanbostanci.com/posts/knowhow/locality-of-reference/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg><span class="sr-only">Share this post via WhatsApp</span></a><a href="https://www.facebook.com/sharer.php?u=https://furkanbostanci.com/posts/knowhow/locality-of-reference/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg><span class="sr-only">Share this post on Facebook</span></a><a href="https://x.com/intent/post?url=https://furkanbostanci.com/posts/knowhow/locality-of-reference/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on X"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg><span class="sr-only">Share this post on X</span></a><a href="https://t.me/share/url?url=https://furkanbostanci.com/posts/knowhow/locality-of-reference/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via Telegram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg><span class="sr-only">Share this post via Telegram</span></a><a href="https://pinterest.com/pin/create/button/?url=https://furkanbostanci.com/posts/knowhow/locality-of-reference/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Pinterest"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 20l4 -9" /><path d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75 -1.554 3.75 -4a5 5 0 1 0 -9.7 1.7" /><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg><span class="sr-only">Share this post on Pinterest</span></a><a href="mailto:?subject=See%20this%20post&#38;body=https://furkanbostanci.com/posts/knowhow/locality-of-reference/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg><span class="sr-only">Share this post via email</span></a></div></div> <hr class="my-6 border-dashed"> <!-- Previous/Next Post Buttons --> <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2">  <a href="/posts/ai/byte-pair-encoding-tokenizer" class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"> <div> <span>Next Post</span> <div class="text-sm text-accent/85">Byte Pair Encoding Tokenizer</div> </div> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6l6 6l-6 6" /></svg> </a> </div> </main> <footer class="w-full mt-auto"> <div class="mx-auto max-w-app px-0"> <hr class="border-border" aria-hidden="true"> </div> <div class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"> <div class="flex-wrap justify-center gap-1 flex"> <a href="https://github.com/steetstyle" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="Furkan Bostancı on GitHub"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg> <span class="sr-only">Furkan Bostancı on GitHub</span> </a><a href="https://www.linkedin.com/in/steetstyle/" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="Furkan Bostancı on LinkedIn"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg> <span class="sr-only">Furkan Bostancı on LinkedIn</span> </a><a href="mailto:bostanci_furkan@hotmail.com" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="Send an email to Furkan Bostancı"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> <span class="sr-only">Send an email to Furkan Bostancı</span> </a> </div> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row"> <span>Copyright &#169; 2025</span> <span class="hidden sm:inline">&nbsp;|&nbsp;</span> <span>All rights reserved.</span> </div> </div> </footer>  </body></html> <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      // Check if --file-name-offset custom property exists
+      const computedStyle = getComputedStyle(codeBlock);
+      const hasFileNameOffset =
+        computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
+
+      // Determine the top positioning class
+      const topClass = hasFileNameOffset
+        ? "top-(--file-name-offset)"
+        : "-top-3";
+
+      const copyButton = document.createElement("button");
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codebock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>
