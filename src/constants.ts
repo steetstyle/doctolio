@@ -7,7 +7,6 @@ import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconPinterest from "@/assets/icons/IconPinterest.svg";
-import IconInstagram from "@/assets/icons/IconInstagram.svg"
 import { SITE } from "@/config";
 
 interface Social {
@@ -23,18 +22,6 @@ export const SOCIALS: Social[] = [
     href: "https://github.com/steetstyle",
     linkTitle: `${SITE.title} on GitHub`,
     icon: IconGitHub,
-  },
-  {
-    name: "Instagram",
-    href: "https://instagram.com/steetstyle",
-    linkTitle: `${SITE.title} on Instagram`,
-    icon: IconInstagram,
-  },
-  {
-    name: "X",
-    href: "https://x.com/username",
-    linkTitle: `${SITE.title} on X`,
-    icon: IconBrandX,
   },
   {
     name: "LinkedIn",

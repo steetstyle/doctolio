@@ -4,8 +4,8 @@
   "version": "5.5.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
-    "build:windows": "astro check && astro build && pagefind --site dist && move dist\\pagefind public\\",
+    "build": "astro check && astro build --base=/ && pagefind  --site dist && cp -r dist/pagefind public/ && rm -r docs && mv dist docs",
+    "build:windows": "astro check && astro build --base=/ && pagefind --site dist && move dist\\pagefind public\\ && move dist docs",
     "preview": "astro preview",
     "sync": "astro sync",
     "astro": "astro",

@@ -1,23 +1,24 @@
 export const SITE = {
-  website: "https://furkanbostanic.com/", // replace this with your deployed domain
+  website: "https://furkanbostanci.com",
+  base: "",
   author: "Furkan Bostancı",
-  profile: "https://furkanbostanci.com/about",
+  profile: "https://github.com/steetstyle",
   desc: "Hello! I’m Furkan Bostancı",
   title: "Furkan Bostancı",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
   postPerPage: 4,
-  scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
+  scheduledPostMargin: 15 * 60 * 1000,
   showArchives: true,
-  showBackButton: true, // show back button in post detail
+  showBackButton: true,
   editPost: {
-    enabled: true,
+    enabled: false,
     text: "Edit page",
-    url: "https://github.com/steetstle/doctolio",
+    url: "https://github.com/steetstyle/doctolio/tree/main/src/",
   },
   dynamicOgImage: true,
-  dir: "ltr", // "rtl" | "auto"
-  lang: "en", // html lang code. Set this empty and default will be "en"
-  timezone: "Europe/Istanbul", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  dir: "ltr",
+  lang: "en",
+  timezone: "Europe/Istanbul",
 } as const;

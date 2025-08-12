@@ -26,7 +26,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
     <section id="hero" class="pt-8 pb-6">
       <a
         target="_blank"
-        href="/rss.xml"
+        href={`${SITE.base}/rss.xml`}
         class="inline-block"
         aria-label="rss feed"
         title="RSS Feed"
@@ -93,7 +93,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
     }
 
     <div class="my-8 text-center">
-      <LinkButton href="/posts/">
+      <LinkButton href={`${SITE.base}/posts/`}>
         All Posts
         <IconArrowRight class="inline-block rtl:-rotate-180" />
       </LinkButton>
